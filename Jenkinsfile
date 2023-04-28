@@ -9,7 +9,7 @@ pipeline {
         spec:
           containers:
           - name: yamllint
-            image: jed.ocir.io/axnfm4jb3i73/dx-jenkins-images/helm-oci:latest
+            image: jed.ocir.io/axnfm4jb3i73/dx-coder-images/yamllint:latest
             command:
             - cat
             tty: true
@@ -50,6 +50,7 @@ pipeline {
                     sh '''
                     oci --version
                     echo "testing helm version"
+                    kubectl get po
                     #helm version
                     
                     # add sonarqube helm chart repo
