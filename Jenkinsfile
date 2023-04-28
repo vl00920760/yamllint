@@ -1,4 +1,4 @@
-// Pipeline for helm chart
+// Pipeline for Yaml Linting
 
 pipeline {
   agent {
@@ -8,8 +8,8 @@ pipeline {
         kind: Pod
         spec:
           containers:
-          - name: helm
-            image: jed.ocir.io/axnfm4jb3i73/dx-jenkins-images/helm-oci:latest
+          - name: yamllint
+            image: jed.ocir.io/axnfm4jb3i73/dx-coder-images/yamllint:latest
             command:
             - cat
             tty: true
@@ -37,10 +37,10 @@ pipeline {
       }
     }
  
-       stage('deploy helm') {
+       stage('deploy yamllint') {
         steps {
             script {
-          container('helm') {
+          container('yamllint') {
               
             withCredentials([usernamePassword(credentialsId: 'github_token', passwordVariable: 'pass', usernameVariable: 'user')]){
                       sh """
@@ -50,6 +50,7 @@ pipeline {
                     sh '''
                     oci --version
                     echo "testing helm version"
+                    install python3-pip -y
                     #helm version
                     
                     # add sonarqube helm chart repo
