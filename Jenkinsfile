@@ -1,4 +1,4 @@
-// Pipeline for Yaml Linting
+// Pipeline for yaml linting
 
 pipeline {
   agent {
@@ -9,7 +9,7 @@ pipeline {
         spec:
           containers:
           - name: yamllint
-            image: jed.ocir.io/axnfm4jb3i73/dx-coder-images/yamllint:latest
+            image: jed.ocir.io/axnfm4jb3i73/dx-jenkins-images/helm-oci:latest
             command:
             - cat
             tty: true
@@ -26,7 +26,7 @@ pipeline {
 }
 
     stages{
-      
+
       stage('Run gitcheckout') {
       steps {
           script{
@@ -36,12 +36,12 @@ pipeline {
         }
       }
     }
- 
+
        stage('deploy yamllint') {
         steps {
             script {
           container('yamllint') {
-              
+
             withCredentials([usernamePassword(credentialsId: 'github_token', passwordVariable: 'pass', usernameVariable: 'user')]){
                       sh """
                         git config --global url.https://${user}:${pass}@github.com/.insteadOf https://github.com/
@@ -50,12 +50,26 @@ pipeline {
                     sh '''
                     oci --version
                     echo "testing helm version"
-                      
+                    #helm version
+                    
+                    # add sonarqube helm chart repo
+                    
+                    #helm repo add bitnami https://charts.bitnami.com/bitnami
+                    #helm repo update
+                    
+                    # create a namespace
+                   # kubectl create namespace sonarqube-vivek3
+                    
+                    #install sonarqube
+                    #helm install my-sonarqube bitnami/sonarqube -n sonarqube-vivek3
+                    
+                    #echo " sonarqube installed"
+                    
                     '''
             }
             }
          }
-     
+
        }
 
   }
