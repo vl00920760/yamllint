@@ -46,6 +46,10 @@ pipeline {
             image: jed.ocir.io/axnfm4jb3i73/trufflehog1:latest
             command:
             - cat
+          - name: python
+            image: jed.ocir.io/axnfm4jb3i73/dx-jenkins-images/python:latest
+            command:
+            - cat
             tty: true
           - name: yamllint
             image: jed.ocir.io/axnfm4jb3i73/dx-coder-images/yamllint:latest
@@ -114,7 +118,18 @@ pipeline {
       }
     }
 
-
+ stage("Install Pip3") {
+      steps {
+        script {
+          container('python') {
+                 sh """
+                  echo "Inside stage pip3"
+                  pip3 --version
+                """
+          }
+        }
+      }
+    }
 
     stage("Terraform Compliance and checkov") {
       steps {
