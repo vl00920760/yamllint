@@ -137,10 +137,6 @@ pipeline {
       steps {
         script {
           container('yamllint') {
-            tfci.config()
-            sh '''
-              git config --global url.https://kv00797898:$userpat@github.com/.insteadOf https://github.com/
-            '''
                 sh """
                   echo "hello"
                 """
