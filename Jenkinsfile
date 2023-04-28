@@ -127,12 +127,32 @@ pipeline {
                 sh """
                   cd '$WORKSPACE'
                   terraform version
-                  terraform init
                 """
           }
         }
       }
     }
+     
+     stage("yaml lint build") {
+      steps {
+        script {
+          container('yamllint') {
+            tfci.config()
+            sh '''
+              git config --global url.https://kv00797898:$userpat@github.com/.insteadOf https://github.com/
+            '''
+                sh """
+                  pip3 --version
+                """
+          }
+        }
+      }
+    }
+     
+     
+     
+     
+     
   }
 }
 
