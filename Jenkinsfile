@@ -83,12 +83,12 @@ pipeline {
     }
 
    
- stage("Install Pip3") {
+ stage("check Pip3") {
       steps {
         container('python') {
           script{
                     sh """
-                  echo "hello1"
+                  echo "if pip3 present"
                   pip3 --version
                 """
           }
@@ -102,7 +102,10 @@ pipeline {
         script {
           container('yamllint') {
                 sh """
-                  echo "hello2"
+                  echo "install yaml lint"
+                  python3 -m pip install --user yamllint
+                  echo "check yaml lint version.."
+                  yamllint --version
                 """
           }
         }
