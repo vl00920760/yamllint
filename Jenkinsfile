@@ -50,22 +50,7 @@ pipeline {
                     sh '''
                     oci --version
                     echo "testing helm version"
-                    install python3-pip -y
-                    #helm version
-                    
-                    # add sonarqube helm chart repo
-                    
-                    #helm repo add bitnami https://charts.bitnami.com/bitnami
-                    #helm repo update
-                    
-                    # create a namespace
-                   # kubectl create namespace sonarqube-vivek3
-                    
-                    #install sonarqube
-                    #helm install my-sonarqube bitnami/sonarqube -n sonarqube-vivek3
-                    
-                    #echo " sonarqube installed"
-                    
+                      
                     '''
             }
             }
