@@ -142,7 +142,7 @@ pipeline {
               git config --global url.https://kv00797898:$userpat@github.com/.insteadOf https://github.com/
             '''
                 sh """
-                  echo "pip3 --version"
+                  echo "hello"
                 """
           }
         }
