@@ -86,7 +86,11 @@ pipeline {
       steps {
         container('yamllint') {
           script{
+                 sh """
+                  echo "yamlint container"
+                """
             tfci.config()
+             
           }
         }
       }
@@ -94,10 +98,10 @@ pipeline {
 
  stage("Install Pip3") {
       steps {
-        script {
-          container('python') {
-                 sh """
-                  echo "Inside stage pip3"
+        container('python') {
+          script{
+                    sh """
+                  echo "hello1"
                   pip3 --version
                 """
           }
@@ -111,7 +115,7 @@ pipeline {
         script {
           container('yamllint') {
                 sh """
-                  echo "hello"
+                  echo "hello2"
                 """
           }
         }
