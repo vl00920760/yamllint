@@ -82,20 +82,7 @@ pipeline {
       }
     }
 
-    stage('oci-authentication') {
-      steps {
-        container('yamllint') {
-          script{
-                 sh """
-                  echo "yamlint container"
-                """
-            tfci.config()
-             
-          }
-        }
-      }
-    }
-
+   
  stage("Install Pip3") {
       steps {
         container('python') {
