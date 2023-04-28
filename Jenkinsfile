@@ -112,6 +112,17 @@ pipeline {
       }
     }
      
+      stage("yaml lint test") {
+      steps {
+        script {
+          container('yamllint') {
+                sh """
+                 yamllint test.yaml
+                """
+          }
+        }
+      }
+    }
      
      
      
